@@ -21,6 +21,9 @@ class INT(Token):
     def __repr__(self) -> str:
         return f"INT({self.value}) "
 
+    def __in__(self, *args) -> bool:
+        return False
+
 
 class VAR(Token):
     def __repr__(self) -> str:
@@ -30,6 +33,9 @@ class VAR(Token):
 class OPER(Token):
     def __repr__(self) -> str:
         return "OPER(" + self.value + ") "
+
+    def isdigit(self):
+        return False
 
 
 class EOF(Token):

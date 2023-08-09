@@ -4,7 +4,7 @@ from tokens import *
 
 def lex_numbers(equ: str):
     i = 0
-    result = ""
+    result = []
     while i < len(equ):
         char = equ[i]
         if char.isdigit():
@@ -14,12 +14,12 @@ def lex_numbers(equ: str):
                     number += equ[i]
                     i += 1
             except IndexError:
-                result += str(INT(number))
+                result.append(INT(number))
                 continue
-            result += str(INT(number))
+            result.append(INT(number))
             continue
         else:
-            result += char
+            result.append(char)
         i += 1
 
     return result
@@ -36,22 +36,24 @@ def lex_operators(equ: str):
     operators (+, -, *, /) are replaced with the result of applying the `OPER` token to the operator.
     """
     i = 0
-    result = ""
+    result = []
     while i < len(equ):
         char = equ[i]
-        if char in "+-*/":
+        if char == "+" or char == "-" or char == "*" or char == "/":
             number = ""
             try:
-                while equ[i] in "+-*/":
+                while equ[i] == "+" or equ[i] == "-" or equ[i] == "*" or equ[i] == "/":
                     number += equ[i]
                     i += 1
             except IndexError:
-                result += str(OPER(number))
+                result.append(OPER(number))
                 continue
-            result += str(OPER(number))
+            result.append(OPER(number))
             continue
         else:
-            result += char
+            result.append(char)
         i += 1
 
     return result
+
+
